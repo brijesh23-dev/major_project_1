@@ -47,7 +47,7 @@ li{
     text-decoration: underline;
 }
 /* cards */
-.card{
+.listing-card{
     border: none !important;
     margin-bottom: 2rem;
 }
@@ -70,8 +70,8 @@ li{
     opacity: 0 !important;
 }
 .card-img-overlay:hover{
-    opacity: 0.2 !important;
-    background-color: white;
+    opacity: 0.6 !important;
+    background-color: rgb(235, 0, 0);
 }
 
 /* container */

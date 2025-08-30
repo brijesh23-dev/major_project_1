@@ -18,5 +18,6 @@ const initDB = async() =>{
     console.log("Database initialized with sample data.");
 }
 
+initDB();
 
 
