@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router({mergeParams:true});
 const Listing = require("../models/listing");
-
+const {isLoggedIn} = require("../middleware.js")
 const { listingSchema} = require("../Schema.js");
 const wrapAsync = require("../utils/wrapasync.js");
 const ExpressError = require("../utils/ExpressError.js");
@@ -16,14 +16,6 @@ const validateListing = (req,res,next) =>{
     }
 };
 
-const isAuth = (req,res,next)=>{
-        if(!req.isAuthenticated()){
-        req.flash("error","login to get access of listings");
-        return res.redirect("/login")
-        next();
-    }
-}
-
 //index route
 router.get("/",wrapAsync(async(req,res)=>{
     const allListings = await Listing.find({});
@@ -31,7 +23,7 @@ router.get("/",wrapAsync(async(req,res)=>{
 }));
 
 //new route
-router.get("/new",isAuth,(req,res)=>{
+router.get("/new",isLoggedIn,(req,res)=>{
     res.render("listings/new.ejs");
 })
 
@@ -47,7 +39,7 @@ router.get("/:id",wrapAsync(async(req,res)=>{
 }));
 
 //create route
-router.post("/",validateListing,wrapAsync(async(req,res)=>{
+router.post("/",isLoggedIn,validateListing,wrapAsync(async(req,res)=>{
 let newlisting = new Listing(req.body.listing);
 if(!req.body.listing){
 }
@@ -57,14 +49,14 @@ res.redirect("/listings");
 }));
 
 //edit route
-router.get("/:id/edit",isAuth,wrapAsync(async(req,res)=>{
+router.get("/:id/edit",isLoggedIn,wrapAsync(async(req,res)=>{
     const {id} = req.params;
     const listing = await Listing.findById(id);
     res.render("listings/edit.ejs",{listing});
 }));
 
 //update route
-router.put("/:id",isAuth,wrapAsync(async(req,res)=>{
+router.put("/:id",isLoggedIn,wrapAsync(async(req,res)=>{
  if(!req.body.listing){
     throw new ExpressError(400,"send valid data for listing");
 }
@@ -75,7 +67,7 @@ router.put("/:id",isAuth,wrapAsync(async(req,res)=>{
 }));
 
 //delete route
-router.delete("/:id",isAuth,wrapAsync(async(req,res)=>{
+router.delete("/:id",isLoggedIn,wrapAsync(async(req,res)=>{
     const {id} = req.params;
     await Listing.findByIdAndDelete(id);
     req.flash("success","listing is Deleted!");
