@@ -17,18 +17,22 @@ const validateListing = (req,res,next) =>{
 };
 
 //index route
-router.get("/",wrapAsync(async(req,res)=>{
+router.get("/",
+    wrapAsync(async(req,res)=>{
     const allListings = await Listing.find({});
      res.render("listings/index.ejs",{allListings});
 }));
 
 //new route
-router.get("/new",isLoggedIn,(req,res)=>{
+router.get("/new",
+    isLoggedIn,
+    (req,res)=>{
     res.render("listings/new.ejs");
 })
 
 //show route
-router.get("/:id",wrapAsync(async(req,res)=>{
+router.get("/:id",
+    wrapAsync(async(req,res)=>{
     const {id} = req.params;
     const listing = await Listing.findById(id).populate("reviews");
     if(!listing){
@@ -39,7 +43,9 @@ router.get("/:id",wrapAsync(async(req,res)=>{
 }));
 
 //create route
-router.post("/",isLoggedIn,validateListing,wrapAsync(async(req,res)=>{
+router.post("/",
+    isLoggedIn,
+    validateListing,wrapAsync(async(req,res)=>{
 let newlisting = new Listing(req.body.listing);
 if(!req.body.listing){
 }
@@ -49,14 +55,18 @@ res.redirect("/listings");
 }));
 
 //edit route
-router.get("/:id/edit",isLoggedIn,wrapAsync(async(req,res)=>{
+router.get("/:id/edit",
+    isLoggedIn,
+    wrapAsync(async(req,res)=>{
     const {id} = req.params;
     const listing = await Listing.findById(id);
     res.render("listings/edit.ejs",{listing});
 }));
 
 //update route
-router.put("/:id",isLoggedIn,wrapAsync(async(req,res)=>{
+router.put("/:id",
+    isLoggedIn,
+    wrapAsync(async(req,res)=>{
  if(!req.body.listing){
     throw new ExpressError(400,"send valid data for listing");
 }
@@ -67,7 +77,9 @@ router.put("/:id",isLoggedIn,wrapAsync(async(req,res)=>{
 }));
 
 //delete route
-router.delete("/:id",isLoggedIn,wrapAsync(async(req,res)=>{
+router.delete("/:id",
+    isLoggedIn,
+    wrapAsync(async(req,res)=>{
     const {id} = req.params;
     await Listing.findByIdAndDelete(id);
     req.flash("success","listing is Deleted!");
