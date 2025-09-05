@@ -29,10 +29,10 @@ router.post("/login",
     passport.authenticate('local',
      { 
     failureRedirect: '/login',
-    failureflash:true,
+    failureFlash:true,
      }),
     async(req,res)=>{
-        req.flash("success","Welcome ! to wanderlust");
+        req.flash("success","Welcome ! to wanderlust you are logged in");
         res.redirect("/listings")
     })
 

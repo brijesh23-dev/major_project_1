@@ -14,6 +14,14 @@ const validateListing = (req,res,next) =>{
     } else {
         next();
     }
+};
+
+const isAuth = (req,res,next)=>{
+        if(!req.isAuthenticated()){
+        req.flash("error","login to get access of listings");
+        return res.redirect("/login")
+        next();
+    }
 }
 
 //index route
@@ -23,7 +31,7 @@ router.get("/",wrapAsync(async(req,res)=>{
 }));
 
 //new route
-router.get("/new",(req,res)=>{
+router.get("/new",isAuth,(req,res)=>{
     res.render("listings/new.ejs");
 })
 
@@ -31,6 +39,10 @@ router.get("/new",(req,res)=>{
 router.get("/:id",wrapAsync(async(req,res)=>{
     const {id} = req.params;
     const listing = await Listing.findById(id).populate("reviews");
+    if(!listing){
+        req.flash("error","you are search for listing not found")
+        return res.redirect("/listings")
+    }
     res.render("listings/show.ejs",{listing})
 }));
 
@@ -45,14 +57,14 @@ res.redirect("/listings");
 }));
 
 //edit route
-router.get("/:id/edit",wrapAsync(async(req,res)=>{
+router.get("/:id/edit",isAuth,wrapAsync(async(req,res)=>{
     const {id} = req.params;
     const listing = await Listing.findById(id);
     res.render("listings/edit.ejs",{listing});
 }));
 
 //update route
-router.put("/:id",wrapAsync(async(req,res)=>{
+router.put("/:id",isAuth,wrapAsync(async(req,res)=>{
  if(!req.body.listing){
     throw new ExpressError(400,"send valid data for listing");
 }
@@ -63,7 +75,7 @@ router.put("/:id",wrapAsync(async(req,res)=>{
 }));
 
 //delete route
-router.delete("/:id",wrapAsync(async(req,res)=>{
+router.delete("/:id",isAuth,wrapAsync(async(req,res)=>{
     const {id} = req.params;
     await Listing.findByIdAndDelete(id);
     req.flash("success","listing is Deleted!");
