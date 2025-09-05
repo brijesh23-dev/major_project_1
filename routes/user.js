@@ -21,15 +21,19 @@ router.post("/signup",async(req,res)=>{
     }
 })
 
-router.get("/login",
+router.get("/login",(req,res)=>{
+    res.render("users/login.ejs");
+});
+
+router.post("/login",
     passport.authenticate('local',
      { 
     failureRedirect: '/login',
-    failureflash:true
+    failureflash:true,
      }),
     async(req,res)=>{
         req.flash("success","Welcome ! to wanderlust");
-        res.render("/users/login.ejs");
+        res.redirect("/listings")
     })
 
 module.exports = router;
