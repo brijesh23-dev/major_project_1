@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router({mergeParams:true});
 const Listing = require("../models/listing");
-const {isLoggedIn} = require("../middleware.js")
+const {isLoggedIn, isOwner} = require("../middleware.js")
 const { listingSchema} = require("../Schema.js");
 const wrapAsync = require("../utils/wrapasync.js");
 const ExpressError = require("../utils/ExpressError.js");
@@ -62,6 +62,7 @@ res.redirect("/listings");
 //edit route
 router.get("/:id/edit",
     isLoggedIn,
+    isOwner,
     wrapAsync(async(req,res)=>{
         console.log(req.body);
         
@@ -73,6 +74,7 @@ router.get("/:id/edit",
 //update route
 router.put("/:id",
     isLoggedIn,
+    isOwner,
     wrapAsync(async(req,res)=>{
  if(!req.body.listing){
     throw new ExpressError(400,"send valid data for listing");
@@ -86,6 +88,7 @@ router.put("/:id",
 //delete route
 router.delete("/:id",
     isLoggedIn,
+    isOwner,
     wrapAsync(async(req,res)=>{
     const {id} = req.params;
     await Listing.findByIdAndDelete(id);
