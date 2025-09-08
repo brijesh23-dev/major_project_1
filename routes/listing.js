@@ -27,6 +27,8 @@ router.get("/",
 router.get("/new",
     isLoggedIn,
     (req,res)=>{
+        console.log("working  .....");
+        
     res.render("listings/new.ejs");
 })
 
@@ -34,6 +36,7 @@ router.get("/new",
 router.get("/:id",
     wrapAsync(async(req,res)=>{
     const {id} = req.params;
+    
     const listing = await Listing.findById(id).populate("reviews");
     if(!listing){
         req.flash("error","you are search for listing not found")
@@ -58,6 +61,8 @@ res.redirect("/listings");
 router.get("/:id/edit",
     isLoggedIn,
     wrapAsync(async(req,res)=>{
+        console.log(req.body);
+        
     const {id} = req.params;
     const listing = await Listing.findById(id);
     res.render("listings/edit.ejs",{listing});
