@@ -27,8 +27,6 @@ router.get("/",
 router.get("/new",
     isLoggedIn,
     (req,res)=>{
-        console.log("working  .....");
-        
     res.render("listings/new.ejs");
 })
 
