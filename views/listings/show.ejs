@@ -18,7 +18,7 @@
         </div>
      
         <div class="btns">
-               <% if (Curruser && Curruser._id.equals(listing.owner._id) { %> 
+                <% if(Curruser && listing.owner._id.equals(Curruser._id)) { %>
                  <a href="/listings/<%= listing._id%>/edit" class="btn btn-dark col-1 offset-3 edit-btn">Edit</a>
                  <form method="POST" action="/listings/<%= listing._id%>?_method=DELETE">
                 <button class="btn btn-dark offset-5">Delete</button>
@@ -27,6 +27,7 @@
         </div>
         <div class="col-6 offset-3 mt-3">
             <hr>
+            <% if (Curruser && listing.owner._id.equals(Curruser._id)) { %>  
             <h4>Leave a Review</h4>
             <form action="/listings/<%=listing.id%>/reviews" method="POST" novalidate class="needs-validation">
                 <div class="mt-3 mb-3 ">
@@ -43,6 +44,7 @@
                 </div>
                 <button class="btn btn-outline-dark mb-3">submit</button>
             </form>
+            <% } %>
             <hr>
             <p><b>All reviews</b></p>
            <div class="row">
