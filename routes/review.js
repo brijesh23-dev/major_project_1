@@ -4,7 +4,8 @@ const Listing = require("../models/listing.js");
 const wrapAsync = require("../utils/wrapasync.js");
 const ExpressError = require("../utils/ExpressError.js");
 const {  reviewSchema } = require("../Schema.js");
-const Review = require("../models/review.js")
+const Review = require("../models/review.js");
+const { isLoggedIn } = require("../middleware.js");
 
 
 const validateReview = (req,res,next)=>{
@@ -18,6 +19,7 @@ const validateReview = (req,res,next)=>{
 
 //ADD-Review route
 router.post("/",
+    isLoggedIn,
     validateReview,
     wrapAsync(async(req,res)=>{
         console.log(" id: ",req.params.id);
@@ -28,8 +30,7 @@ router.post("/",
         return res.redirect("/listings");
      }
      let newReview = new Review(req.body.review)
-     console.log(newReview);
-     
+     newReview.author = req.user._id;
      listing.reviews.push(newReview);
      await listing.save();
      await newReview.save();

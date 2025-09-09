@@ -9,7 +9,7 @@
         <div class="listing-card col-6 offset-3 show-card">
             <img src="<%=listing.image %>" class="card-img-top show-img" alt="listing_image">
             <div class="card-body">
-                <p class="card-text"><i>managed by @<b><%=listing.owner.username %></b></i></p>
+                <p class="card-text"><i>owned by @<b><%=listing.owner.username %></b></i></p>
                 <p class="card-text"><%=listing.description %></p>
                 <p class="card-text">&#8377;<%=listing.price.toLocaleString("en-NI") %></p>
                 <p class="card-text"><%=listing.location %></p>
@@ -51,7 +51,7 @@
              <% for(review of listing.reviews) { %>
                 <div class="card ms-3 mb-3 col-5">
                     <div class="card-body">
-                    <h5 class="card-title">Jane Doe</h5>
+                    <h5 class="card-title">create by @<i><%=review.author.username%></i></h5>
                     <P class="card-text"><%=review.comment %></p>
                     <p class="card-text"><%=review.rating%> stars</P>
             <form method="POST" action="/listings/<%=listing._id %>/reviews/<%=review._id %>?_method=DELETE">
