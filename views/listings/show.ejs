@@ -51,7 +51,7 @@
              <% for(review of listing.reviews) { %>
                 <div class="card ms-3 mb-3 col-5">
                     <div class="card-body">
-                    <h5 class="card-title">create by @<i><%=review.author.username%></i></h5>
+                    <h5 class="card-title">create by @<i><%=review.author ? review.author.username:"Unknown"%></i></h5>
                     <P class="card-text"><%=review.comment %></p>
                     <p class="card-text"><%=review.rating%> stars</P>
             <form method="POST" action="/listings/<%=listing._id %>/reviews/<%=review._id %>?_method=DELETE">
