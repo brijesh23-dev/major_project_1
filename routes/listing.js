@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router({mergeParams:true});
-const Listing = require("../models/listing");
+const multer  = require('multer')
+const upload = multer({ dest: 'uploads/' })
 const {isLoggedIn, isOwner} = require("../middleware.js")
 const { listingSchema} = require("../Schema.js");
 const wrapAsync = require("../utils/wrapasync.js");
@@ -18,10 +19,14 @@ const validateListing = (req,res,next) =>{
     }
 };
 
-router.route('/').get(wrapAsync(listingController.index))
-.post(isLoggedIn,
-    validateListing,
-    wrapAsync(listingController.createListing))
+router.route('/').
+ get(wrapAsync(listingController.index))
+// .post(isLoggedIn,
+//     validateListing,
+//     wrapAsync(listingController.createListing))
+    .post(upload.single('listing[image]'), function (req, res, next) {
+    res.send(req.file)
+})
       
 //index route
 // router.get("/",
