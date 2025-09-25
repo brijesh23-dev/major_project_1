@@ -45,9 +45,9 @@ const sessionOption = {
 }
 
 //home route
-app.get("/",(req,res)=>{
-    res.send("root page");
-})
+// app.get("/",(req,res)=>{
+//     res.send("root page");
+// })
 
 
 app.use(session(sessionOption));

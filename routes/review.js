@@ -10,9 +10,11 @@ const reviewController = require("../controller/review.js")
 
 
 const validateReview = (req,res,next)=>{
-    let { error } = reviewSchema.validate(req.body);
+    
+    let { error } = reviewSchema.validate(req.body,{convert:true});
     if(error){
-        throw new ExpressError(400,error)
+        const msg = error.details.map(el => el.message).join(',');
+        throw new ExpressError(400,msg)
     }else{
         next();
     }

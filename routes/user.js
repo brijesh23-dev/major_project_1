@@ -19,9 +19,10 @@ router.post("/login",
      { 
     failureRedirect: '/login',
     failureFlash:true,
-     }),userController.login
+     }),
+     userController.login
     );
 
-    router.get("/logout",userController.logout)
+router.get("/logout",userController.logout)
 
 module.exports = router;

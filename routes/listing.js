@@ -18,24 +18,41 @@ const validateListing = (req,res,next) =>{
     }
 };
 
+router.route('/').get(wrapAsync(listingController.index))
+.post(isLoggedIn,
+    validateListing,
+    wrapAsync(listingController.createListing))
+      
 //index route
-router.get("/",
-    wrapAsync(listingController.index));
+// router.get("/",
+//     wrapAsync(listingController.index));
 
 //new route
 router.get("/new",
     isLoggedIn,
     listingController.newFormrender
-    )
+    );
+
+router.route("/:id").get(
+    wrapAsync(listingController.showListing))
+    .put(
+    isLoggedIn,
+    isOwner,
+    wrapAsync(listingController.updateListing))
+    .delete(
+    isLoggedIn,
+    isOwner,
+    wrapAsync(listingController.destroyListing));
 
 //show route
-router.get("/:id",
-    wrapAsync(listingController.showListing));
+// router.get("/:id",
+//     wrapAsync(listingController.showListing));
+    
 
 //create route
-router.post("/",
-    isLoggedIn,
-    validateListing,wrapAsync(listingController.createListing));
+// router.post("/",
+//     isLoggedIn,
+//     validateListing,wrapAsync(listingController.createListing));
 
 //edit route
 router.get("/:id/edit",
@@ -44,15 +61,15 @@ router.get("/:id/edit",
     wrapAsync(listingController.editListing));
 
 //update route
-router.put("/:id",
-    isLoggedIn,
-    isOwner,
-    wrapAsync(listingController.updateListing));
+// router.put("/:id",
+//     isLoggedIn,
+//     isOwner,
+//     wrapAsync(listingController.updateListing));
 
 //delete route
-router.delete("/:id",
-    isLoggedIn,
-    isOwner,
-    wrapAsync(listingController.destroyListing));
+// router.delete("/:id",
+//     isLoggedIn,
+//     isOwner,
+//     wrapAsync(listingController.destroyListing));
 
 module.exports = router;

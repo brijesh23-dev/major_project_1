@@ -29,6 +29,8 @@ module.exports.showListing = async(req,res)=>{
 
 module.exports.createListing = async(req,res)=>{
 let newlisting = new Listing(req.body.listing);
+// console.log(newlisting);
+
 newlisting.owner = req.user._id;
 if(!req.body.listing){
 }
@@ -38,8 +40,7 @@ res.redirect("/listings");
 }
 
 module.exports.editListing = async(req,res)=>{
-        console.log(req.body);
-        
+        // console.log(req.body);
     const {id} = req.params;
     const listing = await Listing.findById(id);
     res.render("listings/edit.ejs",{listing});
