@@ -1,14 +1,18 @@
+if(process.env.NODE_ENV !="production"){
+require('dotenv').config()
+}
+
 const express = require("express");
 const router = express.Router({mergeParams:true});
-const multer  = require('multer')
-const upload = multer({ dest: 'uploads/' })
 const {isLoggedIn, isOwner} = require("../middleware.js")
 const { listingSchema} = require("../Schema.js");
 const wrapAsync = require("../utils/wrapasync.js");
 const ExpressError = require("../utils/ExpressError.js");
 const user = require("../models/user.js");
-
 const listingController = require("../controller/listing.js")
+const multer  = require('multer')
+const { storage } = require("../CloudConfig.js");
+const upload = multer({ storage })
 
 const validateListing = (req,res,next) =>{
     let {error} = listingSchema.validate(req.body);
