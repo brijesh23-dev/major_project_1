@@ -65,7 +65,7 @@
                 <a href="/listings/<%= listing._id %>" class="listing-link">
                 <div class="listing-card col" >
                      <!-- <div class="card-img-overlay"></div> -->
-                    <img src="<%= listing.image %>" class="card-img-top" alt="listing_images" style="height: 20rem;">
+                    <img src="<%= listing.image.url %>" class="card-img-top" alt="listing_images" style="height: 20rem;">
                     <div class="card-body">
                         <p class="card-text"><b><%= listing.title %></b><br>
                             &#8377;<%=listing.price.toLocaleString("en-NI") %>

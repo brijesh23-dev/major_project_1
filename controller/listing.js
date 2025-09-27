@@ -28,11 +28,13 @@ module.exports.showListing = async(req,res)=>{
 }
 
 module.exports.createListing = async(req,res)=>{
+    let url = req.file.path;
+    let filename = req.file.filename;
 let newlisting = new Listing(req.body.listing);
-// console.log(newlisting);
-
 newlisting.owner = req.user._id;
+newlisting.image = {url,filename}
 if(!req.body.listing){
+    throw new ExpressError(400,"send valid data for listing");
 }
 await newlisting.save();
 req.flash("success","New listing created !");

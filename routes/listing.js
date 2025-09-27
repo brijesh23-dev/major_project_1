@@ -23,14 +23,14 @@ const validateListing = (req,res,next) =>{
     }
 };
 
-router.route('/').
- get(wrapAsync(listingController.index))
-// .post(isLoggedIn,
-//     validateListing,
-//     wrapAsync(listingController.createListing))
-    .post(upload.single('listing[image]'), function (req, res, next) {
-    res.send(req.file)
-})
+router
+.route('/')
+.get(wrapAsync(listingController.index))
+.post(isLoggedIn,
+    upload.single('listing[image]'),
+    validateListing,
+    wrapAsync(listingController.createListing)
+)
       
 //index route
 // router.get("/",
