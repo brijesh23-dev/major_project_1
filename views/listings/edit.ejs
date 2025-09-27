@@ -12,7 +12,13 @@
             <textarea name="listing[description]" class="form-control" id="description"><%= listing.description%> </textarea>
         </div>
 
-         <div class="mb-3"> <label for="image link" class="form-label">update new Image link</label>
+        <div class="mb-3" id="upload_img">
+            <h5>Original image</h5>
+          <img src="<%=listingOriginalUrl%>" alt="">
+        </div>
+
+         <div class="mb-3">
+             <label for="image link" class="form-label">update new Image link</label>
             <input type="file" name="listing[image]" class="form-control" id="image link">
         </div>
         <div class="mb-3"> <label for="price" class="form-label">Price</label>

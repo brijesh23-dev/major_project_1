@@ -102,3 +102,10 @@ li{
     flex-wrap: wrap;
     margin: auto;
 }
+
+#upload_img img{
+    height: 22vh;
+    width: 15vw;
+    object-fit:cover;
+    border-radius: 0.5rem;
+}
