@@ -46,6 +46,8 @@ router.route("/:id").get(
     wrapAsync(listingController.showListing))
     .put(
     isLoggedIn,
+    validateListing,
+    upload.single('listing[image]'),
     isOwner,
     wrapAsync(listingController.updateListing))
     .delete(

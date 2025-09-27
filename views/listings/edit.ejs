@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-8 offset-2">
     <h3>Edit your listings</h3>
-    <form method="POST" action="/listings/<%= listing._id%>?_method=PUT">
+    <form method="POST" action="/listings/<%= listing._id%>?_method=PUT" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>
             <input type="text"  name="listing[title]" id="title" value="<%=listing.title%>" class="form-control">
@@ -12,8 +12,8 @@
             <textarea name="listing[description]" class="form-control" id="description"><%= listing.description%> </textarea>
         </div>
 
-         <div class="mb-3"> <label for="image link" class="form-label">image Link</label>
-            <input type="text" name="listing[url]" value="<%= listing.image.url%>" class="form-control" id="image link">
+         <div class="mb-3"> <label for="image link" class="form-label">update new Image link</label>
+            <input type="file" name="listing[image]" class="form-control" id="image link">
         </div>
         <div class="mb-3"> <label for="price" class="form-label">Price</label>
             <input type="number" name="listing[price]" value="<%= listing.price%>" class="form-control" id="price">
