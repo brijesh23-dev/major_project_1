@@ -66,13 +66,13 @@ li{
     text-decoration: none !important;
     color: black !important;
 }
-.card-img-overlay{
+/* .card-img-overlay{
     opacity: 0 !important;
-}
-.card-img-overlay:hover{
+}  */
+/* .card-img-overlay:hover{
     opacity: 0.6 !important;
     background-color: rgb(235, 0, 0);
-}
+}  */
 
 /* container */
 .container{
@@ -97,10 +97,15 @@ li{
     padding-right: 0;
 }
 
-.checkbtn{
+.toggle-tax{
+    cursor: pointer;
+    margin-top: 2rem;
+    margin-left: auto;
     display: flex;
-    flex-wrap: wrap;
-    margin: auto;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    height: 3rem;
 }
 
 #upload_img img{
@@ -108,4 +113,43 @@ li{
     width: 15vw;
     object-fit:cover;
     border-radius: 0.5rem;
+}
+
+.Tax-info{
+    display: none;
+}
+
+@media ((max-width: 778px )){ 
+    .f5,.f6,.f7,.f8{
+        display: none !important;
+    }
+}
+
+.navbar-collapse{
+    background-color: rgb(255, 255, 255);
+    transition: all 0.1 ease-in;
+}
+.navbar-collapse a{
+    margin-left: 1rem;
+}
+
+.btn-search{
+    background-color: #FE424D;
+    color: white;
+    border-radius: 25px;
+    padding: 0 1rem 0 1rem;
+}
+.btn-search i{
+    display: inline;
+    margin-right: 0.5rem;
+}
+
+.btn-search:hover{
+    background-color: #FE424D;
+    color: white;
+}
+
+.search-inp{
+    border-radius: 25px;
+    padding: 0.5rem 1rem;
 }
