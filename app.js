@@ -90,7 +90,7 @@ app.all("*",(req,res,next)=>{
 app.use((err,req,res,next)=>{
     let {status = 500,message="something went wrong"} = err;  //error handler
     // res.status(status).send(message);
-    res.render("error.ejs",{err});  //render error page
+    res.render("error.ej~s",{err});  //render error page
     
 });
 
