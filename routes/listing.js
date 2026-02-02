@@ -23,6 +23,7 @@ const validateListing = (req,res,next) =>{
     }
 };
 
+
 router
 .route('/')
 .get(wrapAsync(listingController.index))
@@ -32,9 +33,8 @@ router
     wrapAsync(listingController.createListing)
 )
       
-//index route
-// router.get("/",
-//     wrapAsync(listingController.index));
+router.get("/",
+    wrapAsync(listingController.index));
 
 //new route
 router.get("/new",

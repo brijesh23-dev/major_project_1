@@ -1,6 +1,6 @@
 const User = require("../models/user");
 
-module.exports.signup = async(req,res)=>{
+module.exports.signup = async(req,res,next)=>{
     try{
     let {email,username,password} = req.body;
     const newUser = await User({email,username});
