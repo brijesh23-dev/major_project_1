@@ -16,8 +16,10 @@
             opacity: 1;
         }
 
-        .filter p {
+        .filter a {
             font-size: 0.8rem;
+            text-decoration: none;
+            color: black;
         }
     </style>
 
@@ -25,47 +27,38 @@
         <div id="filters">
             <div class="filter f1">
                 <div><i class="fa-solid fa-fire"></i></div>
-                <p>trending</p>
+                <a href="/listings">All</a>
             </div>
             <div class="filter f2">
                 <div><i class="fa-solid fa-bed"></i></div>
-                <p>rooms</p>
+                <a href="/listings?category=rooms">Rooms</a>
             </div>
             <div class="filter f3">
                 <div><i class="fa-solid fa-mountain-city"></i></div>
-                <p>iconic city</p>
+                <a href="/listings?category=city">City</a>
             </div>
             <div class="filter f4">
                 <div><i class="fa-solid fa-mountain"></i></div>
-                <p>mountains</p>
-            </div>
-            <div class="filter f5">
-                <div><i class="fa-brands fa-fort-awesome"></i></div>
-                <p>castles</p>
+                <a href="/listings?category=mountains">Mountains</a>
             </div>
             <div class="filter f6">
                 <div><i class="fa-solid fa-water-ladder"></i></div>
-                <p>amazing pool</p>
-            </div>
-            <div class="filter f7">
-                <div><i class="fa-solid fa-campground"></i></div>
-                <p>camping</p>
-            </div>
-            <div class="filter f8">
-                <div><i class="fa-solid fa-cow"></i></div>
-                <p>farms</p>
+                <a href="/listings?category=beach">Beach</a>
             </div>
             <div class="filter f9">
                 <div><i class="fa-solid fa-snowflake"></i></div>
-                <p>Arctic</p>
+                <a href="/listings?category=arctic">Arctic</a>
             </div>
-            <div class="filter f9">
-                <div><i class="fa-solid fa-plane"></i></div>
-                <p>Airport</p>
-            </div>
-            <div class="filter f9">
-                <div><i class="fa-solid fa-car"></i></div>
-                <p>Transport</p>
+            <div class="mt-4">
+            <form method="GET" action="/listings" >
+            <select name="sort" onchange="this.form.submit()" class="form-select">
+                  <option value="">Sort By</option>
+                  <option value="priceLow">Price: Low to High</option>
+                  <option value="priceHigh">Price: High to Low</option>
+                  <option value="country">Country A-Z</option>
+                  <option value="location">Location A-Z</option>
+             </select>
+          </form>
             </div>
             <div class="toggle-tax border border-1 border-black  rounded-4 ">
                 <div class="form-check form-switch form-check-reverse">
@@ -78,7 +71,7 @@
             <% for(let listing of allListings){ %>
                 <a href="/listings/<%= listing._id %>" class="listing-link">
                     <div class="listing-card col">
-                        <img src="<%= listing.image.url %>" class="card-img-top" alt="listing_images"
+                        <img src="<%=listing.image.url %>" class="card-img-top" alt="listing_images"
                             style="height: 20rem;">
                         <!-- <div class="card-img-overlay">abcd</div> -->
                         <div class="card-body">
@@ -91,6 +84,7 @@
                         </div>
                     </div>
                 </a>
+                <!-- <p><%= listing.image.url %></p> -->
                 <%}%>
         </div>
     </body>

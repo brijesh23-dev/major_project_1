@@ -7,14 +7,15 @@
     "description": "",
     "main": "app.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "dev": "nodemon app.js"
     },
     "keywords": [],
     "author": "brijesh",
     "license": "ISC",
     "type": "commonjs",
     "dependencies": {
-        "cloudinary": "^1.41.0",
+        "cloudinary": "^2.10.0",
         "connect-flash": "^0.1.1",
         "connect-mongo": "^6.0.0",
         "cookie-parser": "^1.4.7",
@@ -27,7 +28,7 @@
         "method-override": "^3.0.0",
         "mongoose": "^8.16.0",
         "multer": "^2.0.2",
-        "multer-storage-cloudinary": "^4.0.0",
+        "multer-storage-cloudinary": "^2.2.1",
         "ngrok": "^5.0.0-beta.2",
         "passport": "^0.7.0",
         "passport-local": "^1.0.0",
